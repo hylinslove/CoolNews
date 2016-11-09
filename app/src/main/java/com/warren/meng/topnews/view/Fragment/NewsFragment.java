@@ -1,6 +1,7 @@
 package com.warren.meng.topnews.view.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.warren.meng.topnews.adapter.CommonAdapter;
 import com.warren.meng.topnews.modle.RetrofitUtil;
 import com.warren.meng.topnews.modle.bean.BeanMain;
 import com.warren.meng.topnews.view.IMain;
+import com.warren.meng.topnews.view.NewsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,7 @@ public class NewsFragment extends Fragment implements IMain {
     public static NewsFragment getFragment(String value) {
         Bundle bundle = new Bundle();
         NewsFragment fragment = new NewsFragment();
-        bundle.putString("type",value);
+        bundle.putString("type", value);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -56,21 +58,27 @@ public class NewsFragment extends Fragment implements IMain {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_news,null);
+        view = inflater.inflate(R.layout.fragment_news, null);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_news);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
 
-        RetrofitUtil.getNewsData(getArguments().getString("type","toutiao"),this);
+        RetrofitUtil.getNewsData(getArguments().getString("type", "toutiao"), this);
         adapter = new CommonAdapter<>(context,
                 list,
                 R.layout.item_layout,
-                BR.item_data);
+                BR.item_data,
+                this);
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
+    public void toNews(String url) {
+        Intent intent = new Intent(getActivity(), NewsActivity.class);
+        intent.putExtra("url", url);
+        getActivity().startActivity(intent);
+    }
 
     @Override
     public void dataGot(BeanMain.ResultBean bean) {

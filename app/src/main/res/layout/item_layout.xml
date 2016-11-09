@@ -7,6 +7,9 @@
            name="item_data"
            type="com.warren.meng.topnews.modle.bean.BeanMain.ResultBean.DataBean"/>
 
+       <variable
+           name="news_fragment"
+           type="com.warren.meng.topnews.view.Fragment.NewsFragment"/>
    </data>
 
 
@@ -16,27 +19,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginLeft="7dp"
+        android:layout_marginTop="2dp"
         android:padding="7dp"
-        android:background="@drawable/item_bac"
+        android:background="@color/alwhite"
+        android:onClick="@{(v) -> news_fragment.toNews(item_data.url)}"
+
         >
         <ImageView
             android:id="@+id/image_news"
             android:layout_width="120dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
+            android:background="@drawable/item_bac"
             app:img="@{item_data.thumbnail_pic_s}"
             />
         <TextView
             android:id="@+id/title_news"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="3"
+            android:padding="7dp"
             android:layout_marginLeft="7dp"
             android:lineSpacingExtra="5dp"
             android:textSize="16sp"
+            android:textColor="@color/colorText"
             android:text="@{item_data.title}"
             />
     </LinearLayout>

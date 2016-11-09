@@ -5,4 +5,5 @@
     <color name="colorAccent">#faf6f6</color>
     <color name="colorBac">#cecece</color>
     <color name="alwhite">#ffffff</color>
+    <color name="colorText">#212121</color>
 </resources>
