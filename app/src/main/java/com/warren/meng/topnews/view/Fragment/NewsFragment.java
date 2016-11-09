@@ -2,18 +2,14 @@ package com.warren.meng.topnews.view.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 import com.android.databinding.library.baseAdapters.BR;
@@ -22,7 +18,7 @@ import com.warren.meng.topnews.adapter.CommonAdapter;
 import com.warren.meng.topnews.modle.RetrofitUtil;
 import com.warren.meng.topnews.modle.bean.BeanMain;
 import com.warren.meng.topnews.view.IMain;
-import com.warren.meng.topnews.view.NewsActivity;
+import com.warren.meng.topnews.view.activity.NewsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +57,8 @@ public class NewsFragment extends Fragment implements IMain {
         view = inflater.inflate(R.layout.fragment_news, null);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_news);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         RetrofitUtil.getNewsData(getArguments().getString("type", "toutiao"), this);
         adapter = new CommonAdapter<>(context,

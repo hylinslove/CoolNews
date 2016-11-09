@@ -93,7 +93,7 @@ public class BeanMain {
                 Picasso
                         .with(imageView.getContext())
                         .load(url)
-                        .placeholder(R.mipmap.ic_launcher)
+                        .placeholder(R.drawable.you)
                         .into(imageView);
 
             }
