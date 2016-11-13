@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setReturnTransition(new Fade());
         setContentView(R.layout.activity_splash);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -47,9 +45,10 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+
+
     private void initToolbar() {
         binding.toolbarMain.setNavigationIcon(R.drawable.new_small);
-
         setSupportActionBar(binding.toolbarMain);
     }
 

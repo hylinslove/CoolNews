@@ -1,5 +1,6 @@
 package com.warren.meng.topnews.view.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import com.android.databinding.library.baseAdapters.BR;
@@ -32,9 +34,11 @@ public class NewsFragment extends Fragment implements IMain {
     private View view;
     private Context context;
 
+    private ProgressDialog progressDialog;
     private RecyclerView recyclerView;
     private List<BeanMain.ResultBean.DataBean> list = new ArrayList<>();
     private CommonAdapter<BeanMain.ResultBean.DataBean> adapter;
+    private ImageView holder;
 
     public static NewsFragment getFragment(String value) {
         Bundle bundle = new Bundle();
@@ -44,6 +48,8 @@ public class NewsFragment extends Fragment implements IMain {
 
         return fragment;
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -68,6 +74,9 @@ public class NewsFragment extends Fragment implements IMain {
                 this);
         recyclerView.setAdapter(adapter);
 
+        initProgressDialog();
+
+
         return view;
     }
 
@@ -80,11 +89,23 @@ public class NewsFragment extends Fragment implements IMain {
     @Override
     public void dataGot(BeanMain.ResultBean bean) {
         adapter.insertData(bean.getData());
+        progressDialog.dismiss();
 
     }
 
     @Override
     public void dataGotFailure() {
+        progressDialog.dismiss();
+        holder = (ImageView) view.findViewById(R.id.screenHolder_news);
+        holder.setVisibility(View.VISIBLE);
 
     }
+
+
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("正在加载");
+        progressDialog.show();
+    }
+
 }

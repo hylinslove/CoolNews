@@ -21,7 +21,6 @@
         android:background="@color/colorBac"
         >
         <android.support.v7.widget.Toolbar
-            android:transitionName="share"
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

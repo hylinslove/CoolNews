@@ -20,49 +20,23 @@ import java.util.TimerTask;
 public class SplashActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
-    private boolean isback = false;
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置contentFeature,可使用切换动画
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setReturnTransition(new Fade());
         setContentView(R.layout.activity_splash);
-
 
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                View view = SplashActivity.this.findViewById(R.id.activity_splash);
-
-
-                ActivityOptionsCompat optionsCompat =
-                        ActivityOptionsCompat
-                                .makeSceneTransitionAnimation(SplashActivity.this,
-                                        view,"share");
-                SplashActivity.this.startActivity(intent,optionsCompat.toBundle());
-//                SplashActivity.this.finish();
-                isback = true;
+                SplashActivity.this.startActivity(intent);
+                SplashActivity.this.finish();
             }
-        }, 2000);
+        }, 1500);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(isback) {
-//            Toast.makeText(SplashActivity.this,"正在退出...",Toast.LENGTH_SHORT).show();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    SplashActivity.this.finish();
-                }
-            }, 700);
-        }
-    }
+
 }
